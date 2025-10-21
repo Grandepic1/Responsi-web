@@ -4,7 +4,7 @@ from core.base_module import BaseModule
 from PIL import Image
 import re
 
-img = Image.open("./images/algoritma.png")
+img = Image.open(r"images/algoritma.png")
 
 
 class IntroModule(BaseModule):

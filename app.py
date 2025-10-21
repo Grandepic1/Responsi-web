@@ -1,55 +1,68 @@
 import streamlit as st
-from modules.float_double import FloatDoubleModule
-from modules.summary_quiz import SummaryQuizModule
+from modules.theory_quiz import SummaryQuizModule
 from modules.java_practice import JavaPracticeModule
-from modules.variabel_operator_konstanta import tipe_data
 
 st.set_page_config(page_title="Responsi IMA", layout="wide")
 
-st.sidebar.title("📚 Modules")
+st.sidebar.title("📚 Modul")
 module = st.sidebar.radio(
-    "Choose a module:",
+    "Pilih modul:",
     [
         "1️⃣ Variabel, Operator, dan Konstanta",
-        "2️⃣ Float vs Double",
-        "3️⃣ Summary Quiz",
-        "4️⃣ Java Output Practice",
+        "2️⃣ Control Flow",
+        "3️⃣ Tes Teori",
+        "4️⃣ Tes Praktek",
     ],
 )
 
 if module == "1️⃣ Variabel, Operator, dan Konstanta":
     from modules.variabel_operator_konstanta import (
         intro,
-        tipe_data,
         operator,
-        summary,
+        tipe_data_primitif,
+        tipe_data_objek
     )
 
     selected = st.sidebar.radio(
         "Pilih subbab:",
         [
             "Variabel dan Algoritma",
-            "Tipe Data Prima dan Objek",
-            "3.3.2 Operator",
-            "3.3.3 Konstanta",
-            "Ringkasan",
+            "Tipe Data Primitif",
+            "Tipe Data Objek",
+            "Operator",
         ],
     )
 
     if selected == "Variabel dan Algoritma":
         intro.run()
-    elif selected == "Tipe Data Prima dan Objek":
-        tipe_data.run()
-    elif selected == "3.3.2 Operator":
+    elif selected == "Tipe Data Primitif":
+        tipe_data_primitif.run()
+    elif selected == "Tipe Data Objek":
+        tipe_data_objek.run()
+    elif selected == "Operator":
         operator.run()
-    elif selected == "Ringkasan":
-        summary.run()
 
-elif module == "2️⃣ Float vs Double":
-    FloatDoubleModule("Float vs Double Precision").run()
+elif module == "2️⃣ Control Flow":
+    from modules.control_flow import(
+        switchCase,
+        ifElse
+    )
+    selected = st.sidebar.radio(
+        "Pilih subbab:",
+        [
+            "If Else",
+            "Switch Case"
+        ],
+    )
+    if selected == "If Else":
+        ifElse.run()
+    elif selected == "Switch Case":
+        switchCase.run()
 
-elif module == "3️⃣ Summary Quiz":
-    SummaryQuizModule("Summary Quiz").run()
+elif module == "3️⃣ Tes Teori":
+    SummaryQuizModule("Tes Teori IMA").run()
 
-elif module == "4️⃣ Java Output Practice":
-    JavaPracticeModule("Java Output Practice").run()
+elif module == "4️⃣ Tes Praktek":
+    JavaPracticeModule("Tes Praktek IMA").run()
+
+

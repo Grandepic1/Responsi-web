@@ -11,6 +11,20 @@ class BaseModule:
 
         if "wrong_attempts" not in st.session_state:
             st.session_state.wrong_attempts = {}
+    def create_question(self, question:str, choices:list, answer:int, explanation:str):
+        q = st.radio(
+            question,
+            choices,
+            index=None,
+        )
+        if st.button("Cek Jawaban", key=question, disabled=(q is None)):
+            if q == choices[answer-1]:
+                self.success_msg(f"✅ Betul! {explanation}")
+            else:
+                self.error_msg(
+                    "❌ Salah. Coba cek kembali jawabannya!"
+                )
+        st.markdown("---")
 
     def show_title(self):
         st.title(self.title)
