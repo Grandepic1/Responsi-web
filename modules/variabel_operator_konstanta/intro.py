@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 from core.base_module import BaseModule
 from PIL import Image
 import re
@@ -89,8 +90,15 @@ Tulislah kode untuk membuat variabel **String** bernama `kelas` dan isi dengan k
             else:
                 st.error("❌ Format belum sesuai. Pastikan menggunakan tanda kutip ganda dan titik koma.")
 
-        st.caption("💡 Gunakan format: `\"tipeData\" \"namaVariable\" = \"isi variable\";`")
-        
+        st.caption(
+            "💡 Gunakan format: [Tipe data] [nama variable terserah kalian] = [isi];"
+        )
+        st.markdown('---')
+        st.subheader("Mindmap by Keyla")
+
+        figma = """
+        <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/board/oQRm1qM0lDgeLLLLy5HvBU/Mindmap-Responsi-IMA?node-id=0-1&embed-host=share" allowfullscreen></iframe>"""
+        components.html(figma, height=450, scrolling=True)
         
 
 
