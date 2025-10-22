@@ -37,7 +37,7 @@ class BaseModule:
         st.markdown("---")
 
     def create_question_fill(self, question:str, answer:list, explanation:str):
-        
+        key_feedback = f"feedback_{question}"
         st.write(question)
         user_answer = st.text_input("Jawaban: ", key=question)
         if st.button(
@@ -50,15 +50,74 @@ class BaseModule:
                 for a in answer
             )
             if correct:
-                self.success_msg(f"✅ Betul! {explanation}")
+                st.session_state[key_feedback] = f"✅ Betul! {explanation}"
             else:
-                self.error_msg("❌ Salah. Coba cek kembali!")
+                st.session_state[key_feedback] = "❌ Salah. Coba cek kembali!"
+            feedback = st.session_state.get(key_feedback)
+            if feedback:
+                if feedback.startswith("✅"):
+                    self.success_msg(feedback)
+                elif feedback.startswith("❌"):
+                    self.error_msg(feedback)
+        st.markdown("---")
+
+    def create_grouped_questions(self, questions: list, choices: list):
+        # Shared button click flag
+        check_clicked = st.button("Cek Jawaban", key=f"btn_group_{questions[0]['question']}")
+
+        # Show questions
+        for i, q in enumerate(questions):
+            q_key = f"group_q{q['question']}"
+            fb_key = f"group_fb{q['question']}"
+
+            # Initialize feedback state
+            if fb_key not in st.session_state:
+                st.session_state[fb_key] = None
+
+            # Get answer safely
+            user_ans = st.selectbox(
+                f"**{q['question']}**",
+                choices,
+                index=None,
+                placeholder="Pilih jawaban...",
+                key=q_key,
+            )
+
+            # ✅ Process answers immediately after button click
+            if check_clicked:
+                if user_ans is None:
+                    st.session_state[fb_key] = "⚠️ Silakan pilih jawaban terlebih dahulu."
+                elif user_ans == choices[q["answer"] - 1]:
+                    st.session_state[fb_key] = f"✅ Betul! {q['explanation']}"
+                else:
+                    st.session_state[fb_key] = f"❌ Salah. {q['explanation']}"
+
+            # Show feedback (persistent)
+            feedback = st.session_state.get(fb_key)
+            if feedback:
+                if feedback.startswith("✅"):
+                    self.success_msg(feedback)
+                elif feedback.startswith("❌"):
+                    self.error_msg(feedback)
+                elif feedback.startswith("⚠️"):
+                    st.warning(feedback)
+
         st.markdown("---")
 
     def clear_feedback(self):
         for key in list(st.session_state.keys()):
             if key.startswith("feedback_") or key.startswith("input_"):
                 del st.session_state[key]
+
+    def auto_clear_feedback(self, current_module_name: str):
+        """Automatically clear feedback when switching modules/pages."""
+        prev_module = st.session_state.get("current_module")
+        if prev_module != current_module_name:
+            for key in list(st.session_state.keys()):
+                if key.startswith("feedback_") or key.startswith("input_"):
+                    del st.session_state[key]
+
+        st.session_state["current_module"] = current_module_name
 
     def show_title(self):
         st.title(self.title)
