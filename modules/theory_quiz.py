@@ -4,7 +4,7 @@ from core.base_module import BaseModule
 
 class SummaryQuizModule(BaseModule):
     def run(self):
-        self.clear_feedback()
+        self.auto_clear_feedback(self.title)
         self.show_title()
         self.create_question(
             "1. String termasuk tipe data apa?",
@@ -396,6 +396,100 @@ System.out.println(c);
             ],
             2,
             "Keyword return mengembalikan nilai ke pemanggil method di Java.",
+        )
+
+        st.code(
+            """public class Main {
+    public static void main(String[] args) {
+        String pilihanMenu = "B";
+        __A__ harga;
+
+        switch (__B__) {
+            case "A":
+                harga = 15000;
+                System.out.println("Menu A: Nasi Goreng");
+                break;
+            case "B":
+                harga = 12000;
+                System.out.println("Menu B: Bakso");
+                break;
+            case "C":
+                harga = 10000;
+                System.out.println("Menu C: Mie Ayam");
+                break;
+            __C__:
+                harga = 0;
+                System.out.println("Pilihan menu tidak ada.");
+                break;
+        }
+        System.out.println("Total harga: Rp " + __D__);
+    }
+}""",
+            "java",
+        )
+        self.create_grouped_questions(
+            [
+                {
+                    "question": "Apa yang bisa diisikan di bagian A?",
+                    "answer": 2,
+                    "explanation": "Double digunakan untuk isi angka.",
+                },
+                {
+                    "question": "Apa yang bisa diisikan di bagian B?",
+                    "answer": 1,
+                    "explanation": "Case yang akan dicek adalah pilihanMenu.",
+                },
+                {
+                    "question": "Apa yang bisa diisikan di bagian C?",
+                    "answer": 3,
+                    "explanation": "Default untuk tidak ada case yang cocok.",
+                },
+                {
+                    "question": "Apa yang bisa diisikan di bagian D?",
+                    "answer": 4,
+                    "explanation": "Gunakan variable harga untuk menampilkan total harga.",
+                },
+            ],
+            ["pilihanMenu", "double", "default", "harga"],
+        )
+
+        st.subheader("Jawab Pertanyaan dibawah ini!")
+        self.create_grouped_questions(
+            [
+                {
+                    "question": "Sebuah pernyataan kontrol yang digunakan untuk mengeksekusi kode yang berbeda-beda berdasarkan nilai dari sebuah variabel.",
+                    "answer": 4,
+                    "explanation": "Double digunakan untuk isi angka.",
+                },
+                {
+                    "question": "Sebuah pernyataan kontrol yang digunakan untuk mengeksekusi kode yang berbeda-beda berdasarkan kondisi yang diberikan",
+                    "answer": 1,
+                    "explanation": "Case yang akan dicek adalah pilihanMenu.",
+                },
+                {
+                    "question": "Sebuah metode yang mengembalikan nilai ke pemanggil.",
+                    "answer": 2,
+                    "explanation": "Default untuk tidak ada case yang cocok.",
+                },
+                {
+                    "question": "Sebuah metode yang tidak mengembalikan nilai apa pun.",
+                    "answer": 3,
+                    "explanation": "Gunakan variable harga untuk menampilkan total harga.",
+                },
+            ],
+            ["If-else", "Method Return", "Method Void", "Switch Case", "int"],
+        )
+
+        self.create_question_fill(
+            "Dalam bahasa pemrograman, _______________________ adalah sebuah konsep yang digunakan untuk menyimpan dan mengolah data.",
+            ["variabel", "variable"],
+            "variabel adalah sebuah konsep yang digunakan untuk menyimpan dan mengolah data.",
+        )
+
+        self.create_question_fill(
+            "Operator _______________________ digunakan untuk menghitung sisa hasil bagi dari dua bilangan.",
+            ["%"],
+            "% digunakan untuk menghitung sisa hasil bagi dari dua bilangan.",
         )
 
 
