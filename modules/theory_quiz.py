@@ -165,6 +165,14 @@ System.out.println(hasil);
 
         st.code('____ nama = "Revaldo";')
         self.create_question_fill("14. Lengkapi kode di atas dengan tipe data yang sesuai", ["String"],"String menyimpan teks")
+
+        st.code(
+            """
+int x = 10;
+x += 5;
+System.out.println(x);
+"""
+        )
         self.create_question(
             "15. Berapa output dari kode di atas?",
             ["5", "10", "15", "20"],
