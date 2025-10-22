@@ -1,68 +1,42 @@
 import streamlit as st
-from modules.theory_quiz import SummaryQuizModule
-from modules.java_practice import JavaPracticeModule
 
 st.set_page_config(page_title="Responsi IMA", layout="wide")
 
-st.sidebar.title("📚 Modul")
-module = st.sidebar.radio(
-    "Pilih modul:",
-    [
-        "1️⃣ Variabel, Operator, dan Konstanta",
-        "2️⃣ Control Flow",
-        "3️⃣ Tes Teori",
-        "4️⃣ Tes Praktek",
-    ],
+# --- Modul Utama ---
+
+home = st.Page("main.py", title="Home", icon="🏠")
+
+# Modul 1 - Variabel, Operator, dan Konstanta
+modul1_page = st.Page(
+    "modules/variabel_operator_konstanta/var_main.py",
+    title="1️⃣ Variabel, Operator, dan Konstanta",
+    icon="🧩",
 )
 
-if module == "1️⃣ Variabel, Operator, dan Konstanta":
-    from modules.variabel_operator_konstanta import (
-        intro,
-        operator,
-        tipe_data_primitif,
-        tipe_data_objek
-    )
+# Modul 2 - Control Flow (berisi radio di dalamnya)
+control_flow_page = st.Page(
+    "modules/control_flow/control_main.py", title="2️⃣ Control Flow", icon="🔁"
+)
 
-    selected = st.sidebar.radio(
-        "Pilih subbab:",
-        [
-            "Variabel dan Algoritma",
-            "Tipe Data Primitif",
-            "Tipe Data Objek",
-            "Operator",
+method = st.Page("modules/method.py", title="3️⃣ Method", icon="🔧")
+
+theory_page = st.Page("modules/theory_quiz.py", title="Tes Teori", icon="🧠")
+
+practice_page = st.Page("modules/java_practice.py", title="Tes Praktek", icon="💻")
+
+# --- Navigation setup ---
+pg = st.navigation(
+    {   "Home": [home],
+        "Modul": [
+            modul1_page,
+            control_flow_page,
+            method
         ],
-    )
-
-    if selected == "Variabel dan Algoritma":
-        intro.run()
-    elif selected == "Tipe Data Primitif":
-        tipe_data_primitif.run()
-    elif selected == "Tipe Data Objek":
-        tipe_data_objek.run()
-    elif selected == "Operator":
-        operator.run()
-
-elif module == "2️⃣ Control Flow":
-    from modules.control_flow import(
-        switchCase,
-        ifElse
-    )
-    selected = st.sidebar.radio(
-        "Pilih subbab:",
-        [
-            "If Else",
-            "Switch Case"
+        "Tes": [
+            theory_page,
+            practice_page,
         ],
-    )
-    if selected == "If Else":
-        ifElse.run()
-    elif selected == "Switch Case":
-        switchCase.run()
+    }
+)
 
-elif module == "3️⃣ Tes Teori":
-    SummaryQuizModule("Tes Teori IMA").run()
-
-elif module == "4️⃣ Tes Praktek":
-    JavaPracticeModule("Tes Praktek IMA").run()
-
-
+pg.run()

@@ -8,8 +8,12 @@ class operator(BaseModule):
         self.show_title()
         st.markdown("### 🔢 Operator Aritmatika")
         st.write("""
-Operator Aritmatika adalah operator yang digunakan untuk operasi matematika.    
-Dengan simbol :\n- \* (perkalian)\n- \- (Pengurangan) \n - \+ (Pertambahan) \n - / (Pembagian) \n - \% (Modulo)
+Operator Aritmatika adalah operator yang digunakan untuk operasi matematika. Dengan simbol :
+- \* (perkalian)
+- \- (Pengurangan)
+- \+ (Pertambahan)
+- / (Pembagian)
+- \% (Modulo)
 """)
         code = """
 public class Main {
@@ -142,14 +146,13 @@ System.out.println(a <= c); // false
         # ----------------------------- #
         st.markdown("### 🔀 Operator Logika (Logical Operator)")
         st.write("""
-        Operator logika digunakan untuk menggabungkan dua atau lebih ekspresi boolean.
-
-        | Operator | Nama | Arti |
-        |-----------|------|------|
-        | `&&` | AND | true jika **semua** kondisi true |
-        | `\|\|` | OR | true jika **salah satu** kondisi true |
-        | `!` | NOT | membalikkan nilai true/false |
-        """)
+Operator logika digunakan untuk menggabungkan dua atau lebih ekspresi boolean.
+| Operator | Nama | Arti |
+|-----------|------|------|
+| `&&` | AND | true jika **semua** kondisi true |
+| `||` | OR | true jika **salah satu** kondisi true |
+| `!` | NOT | membalikkan nilai true/false |
+""")
 
         st.code(
             """

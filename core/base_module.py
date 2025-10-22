@@ -12,19 +12,53 @@ class BaseModule:
         if "wrong_attempts" not in st.session_state:
             st.session_state.wrong_attempts = {}
     def create_question(self, question:str, choices:list, answer:int, explanation:str):
+        
+        key_feedback = f"feedback_{question}"
         q = st.radio(
             question,
             choices,
             index=None,
         )
+        if key_feedback not in st.session_state:
+            st.session_state[key_feedback] = None
         if st.button("Cek Jawaban", key=question, disabled=(q is None)):
             if q == choices[answer-1]:
+                st.session_state[key_feedback] = f"✅ Betul! {explanation}"
+            else:
+                st.session_state[key_feedback] = "❌ Salah. Coba cek kembali!"
+        feedback = st.session_state.get(key_feedback)
+
+        if feedback:
+            if feedback.startswith("✅"):
+                self.success_msg(feedback)
+            elif feedback.startswith("❌"):
+                self.error_msg(feedback)
+
+        st.markdown("---")
+
+    def create_question_fill(self, question:str, answer:list, explanation:str):
+        
+        st.write(question)
+        user_answer = st.text_input("Jawaban: ", key=question)
+        if st.button(
+            "Cek Jawaban", key=f"btn_{question}", disabled=(not user_answer.strip())):
+            normalized = user_answer.strip().replace("“", '"').replace("”", '"')
+            normalized_lower = normalized.lower()
+
+            correct = any(
+                normalized_lower == a.strip().lower().replace("“", '"').replace("”", '"')
+                for a in answer
+            )
+            if correct:
                 self.success_msg(f"✅ Betul! {explanation}")
             else:
-                self.error_msg(
-                    "❌ Salah. Coba cek kembali jawabannya!"
-                )
+                self.error_msg("❌ Salah. Coba cek kembali!")
         st.markdown("---")
+
+    def clear_feedback(self):
+        for key in list(st.session_state.keys()):
+            if key.startswith("feedback_") or key.startswith("input_"):
+                del st.session_state[key]
 
     def show_title(self):
         st.title(self.title)

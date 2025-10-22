@@ -89,3 +89,6 @@ class JavaPracticeModule(BaseModule):
 #         total = len(exercises)
 #         st.markdown("---")
 #         self.show_progress(correct, total)
+
+if __name__=='__main__':
+    JavaPracticeModule("Tes Praktek IMA!").run()
