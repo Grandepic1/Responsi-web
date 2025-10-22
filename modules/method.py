@@ -91,6 +91,7 @@ public class Main {
         with st.expander(
             "🧪 Coba Sendiri - Latihan 1 (Method dengan Parameter)", expanded=True
         ):
+            st.code(test_code_1)
             st.write("Masukkan dua angka untuk dikalikan menggunakan method:")
             a = st.text_input("Angka pertama:", "4")
             b = st.text_input("Angka kedua:", "7")
@@ -118,8 +119,8 @@ public class Main {
         sapa(nama);
     }
 }"""
-
         with st.expander("🧪 Coba Sendiri - Latihan 2 (Method Void)", expanded=True):
+            st.code(test_code_2)
             st.write("Masukkan nama kamu untuk disapa oleh program:")
             nama = st.text_input("Nama:")
 
