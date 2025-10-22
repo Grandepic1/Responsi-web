@@ -53,12 +53,12 @@ class BaseModule:
                 st.session_state[key_feedback] = f"✅ Betul! {explanation}"
             else:
                 st.session_state[key_feedback] = "❌ Salah. Coba cek kembali!"
-            feedback = st.session_state.get(key_feedback)
-            if feedback:
-                if feedback.startswith("✅"):
-                    self.success_msg(feedback)
-                elif feedback.startswith("❌"):
-                    self.error_msg(feedback)
+        feedback = st.session_state.get(key_feedback)
+        if feedback:
+            if feedback.startswith("✅"):
+                self.success_msg(feedback)
+            elif feedback.startswith("❌"):
+                self.error_msg(feedback)
         st.markdown("---")
 
     def create_grouped_questions(self, questions: list, choices: list):
