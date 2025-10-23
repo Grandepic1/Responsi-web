@@ -150,7 +150,7 @@ Operator logika digunakan untuk menggabungkan dua atau lebih ekspresi boolean.
 | Operator | Nama | Arti |
 |-----------|------|------|
 | `&&` | AND | true jika **semua** kondisi true |
-| `||` | OR | true jika **salah satu** kondisi true |
+| `\|\|` | OR | true jika **salah satu** kondisi true |
 | `!` | NOT | membalikkan nilai true/false |
 """)
 
